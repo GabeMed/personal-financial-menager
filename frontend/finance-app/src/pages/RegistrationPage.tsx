@@ -10,22 +10,25 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema, type LoginCredentials } from "@/services/auth/schemas";
-import { useLogin } from "@/hooks/useLogin";
+import {
+  registerSchema,
+  type RegisterCredentials,
+} from "@/services/auth/schemas";
+import { useRegister } from "@/hooks/useRegister";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function LoginPage() {
+const RegistrationPage = () => {
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginCredentials>({ resolver: zodResolver(loginSchema) });
+  } = useForm<RegisterCredentials>({ resolver: zodResolver(registerSchema) });
 
-  const { mutate: login, isPending, error } = useLogin();
+  const { mutate: signup, isPending, error } = useRegister();
 
-  const onSubmit = (data: LoginCredentials) =>
-    login(data, {
+  const onSubmit = (data: RegisterCredentials) =>
+    signup(data, {
       onSuccess: () => navigate("/home"),
     });
 
@@ -33,7 +36,7 @@ export default function LoginPage() {
     <Flex minH="100vh" align="center" justify="center">
       <Box p={8} rounded="lg" shadow="md" w="sm">
         <Heading mb={6} textAlign="center">
-          Login
+          Create account
         </Heading>
 
         {error && (
@@ -53,6 +56,14 @@ export default function LoginPage() {
               )}
             </Field.Root>
 
+            <Field.Root invalid={!!errors.email}>
+              <Field.Label>Email</Field.Label>
+              <Input type="email" placeholder="email" {...register("email")} />
+              {errors.email && (
+                <Field.ErrorText>{errors.email.message}</Field.ErrorText>
+              )}
+            </Field.Root>
+
             <Field.Root invalid={!!errors.password}>
               <Field.Label>Password</Field.Label>
               <Input type="password" {...register("password")} />
@@ -62,16 +73,16 @@ export default function LoginPage() {
             </Field.Root>
 
             <Button w="full" type="submit" loading={isPending}>
-              Entrar
+              Register
             </Button>
             <Box textAlign="center">
-              <Link to="/register" color="teal.500">
-                Create an account
-              </Link>
+              <Link to="/">Already resgistered ?</Link>
             </Box>
           </Stack>
         </form>
       </Box>
     </Flex>
   );
-}
+};
+
+export default RegistrationPage;
