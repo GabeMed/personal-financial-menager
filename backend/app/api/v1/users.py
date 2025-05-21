@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from backend.app.db.session import get_db
 from backend.app.crud import crud_user
 from backend.app.schemas.user import UserCreate, UserResponse
-from backend.app.services import auth_service
+from backend.app.core import oauth2
 
 router = APIRouter()
 
@@ -20,6 +20,6 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
 
 @router.get("/users/me", response_model=UserResponse)
 def read_current_user(
-    current_user: UserResponse = Depends(auth_service.get_current_user),
+    current_user: UserResponse = Depends(oauth2.get_current_user),
 ):
     return current_user
