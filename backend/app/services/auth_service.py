@@ -3,13 +3,14 @@ from jose import jwt, JWTError
 from sqlalchemy.orm import Session
 from backend.app.core import config
 from backend.app.core.security import verify_password
-from backend.app.db import crud, dependencies
-from .oauth2 import oauth2_scheme
+from backend.app.crud import crud_user
+from backend.app.db import session
+from backend.app.core.oauth2 import oauth2_scheme
 from fastapi import Depends, HTTPException, status
 
 
 def authenticate_user(db: Session, username: str, password: str):
-    user = crud.get_user_by_username(db, username)
+    user = crud_user.get_user_by_username(db, username)
     if not user or not verify_password(password, user.hashed_password):
         return False
     return user
@@ -43,10 +44,10 @@ def verify_token(token: str):
 
 
 def get_current_user(
-    token: str = Depends(oauth2_scheme), db: Session = Depends(dependencies.get_db)
+    token: str = Depends(oauth2_scheme), db: Session = Depends(session.get_db)
 ):
     username = verify_token(token)
-    user = crud.get_user_by_username(db, username)
+    user = crud_user.get_user_by_username(db, username)
     if not user:
         raise HTTPException(status_code=400, detail="User not found")
     return user
