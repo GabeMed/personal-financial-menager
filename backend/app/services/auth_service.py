@@ -47,7 +47,7 @@ def get_current_user(
     token: str = Depends(oauth2_scheme), db: Session = Depends(session.get_db)
 ):
     username = verify_token(token)
-    user = crud_user.get_user_by_username(db, username)
+    user = user.get_user_by_username(db, username)
     if not user:
         raise HTTPException(status_code=400, detail="User not found")
     return user
