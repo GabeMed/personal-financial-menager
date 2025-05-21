@@ -5,7 +5,7 @@ from backend.app.crud import crud_user
 from backend.app.schemas.user import UserCreate, UserResponse
 from backend.app.core import oauth2
 
-router = APIRouter()
+router = APIRouter("/users")
 
 
 @router.post(
@@ -18,7 +18,7 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
     return new_user
 
 
-@router.get("/users/me", response_model=UserResponse)
+@router.get("/me", response_model=UserResponse)
 def read_current_user(
     current_user: UserResponse = Depends(oauth2.get_current_user),
 ):
