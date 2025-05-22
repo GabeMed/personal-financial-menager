@@ -5,7 +5,7 @@ from backend.app.crud import crud_user
 from backend.app.schemas.user import UserCreate, UserResponse
 from backend.app.core import oauth2
 
-router = APIRouter("/users")
+router = APIRouter(prefix="/users")
 
 
 @router.post(

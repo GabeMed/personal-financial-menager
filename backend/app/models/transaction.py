@@ -1,7 +1,7 @@
 import enum, datetime
 from sqlalchemy import Column, Integer, ForeignKey, DateTime, Numeric, Enum, String
 from sqlalchemy.orm import relationship
-from app.db.base import Base, engine
+from backend.app.db.base import Base
 
 
 class TransactionType(str, enum.Enum):
@@ -22,6 +22,3 @@ class Transaction(Base):
 
     user = relationship("User", back_populates="transactions")
     category = relationship("Category", back_populates="transactions")
-
-
-Transaction.metadata.create_all(bind=engine)

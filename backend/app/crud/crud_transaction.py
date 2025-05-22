@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from app.models.transaction import Transaction
-from app.schemas.transaction import TransactionCreate, TransactionUpdate
+from backend.app.models.transaction import Transaction
+from backend.app.schemas.transaction import TransactionCreate, TransactionUpdate
 
 
 def get_transactions(db: Session, user_id: int, skip: int = 0, limit: int = 25):

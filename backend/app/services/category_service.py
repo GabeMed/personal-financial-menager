@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from app.crud.crud_category import get_categories, create_category
-from app.schemas.category import CategoryCreate
+from backend.app.crud.crud_category import get_categories, create_category
+from backend.app.schemas.category import CategoryCreate
 
 
 def list_categories(db: Session, user_id: int):

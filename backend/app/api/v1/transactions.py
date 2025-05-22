@@ -1,19 +1,19 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from app.db.session import get_db
-from app.core.oauth2 import get_current_user
-from app.schemas.transaction import (
+from backend.app.db.session import get_db
+from backend.app.core.oauth2 import get_current_user
+from backend.app.schemas.transaction import (
     TransactionCreate,
     TransactionUpdate,
     TransactionResponse,
 )
-from app.services.transaction_service import (
+from backend.app.services.transaction_service import (
     list_transactions,
     add_transaction,
     modify_transaction,
     remove_transaction,
 )
-from app.models.transaction import Transaction
+from backend.app.models.transaction import Transaction
 from backend.app.models.user import User
 
 router = APIRouter(prefix="/transactions", tags=["transactions"])

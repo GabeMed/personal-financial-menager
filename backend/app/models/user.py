@@ -1,7 +1,6 @@
 from sqlalchemy import Column, Integer, Numeric, String
 from sqlalchemy.orm import relationship
 from backend.app.db.base import Base
-from backend.app.db.base import engine
 
 
 class User(Base):
@@ -19,6 +18,3 @@ class User(Base):
     transactions = relationship(
         "Transaction", back_populates="user", cascade="all, delete-orphan"
     )
-
-
-User.metadata.create_all(bind=engine)

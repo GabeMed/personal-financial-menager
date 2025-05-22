@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from app.models.category import Category
+from backend.app.models.category import Category
 
 
 def get_categories(db: Session, user_id: int):

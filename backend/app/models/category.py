@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
-from app.db.base import Base, engine
+from backend.app.db.base import Base
 
 
 class Category(Base):
@@ -14,6 +14,3 @@ class Category(Base):
     transactions = relationship(
         "Transaction", back_populates="category", cascade="all, delete-orphan"
     )
-
-
-Category.metadata.create_all(bind=engine)

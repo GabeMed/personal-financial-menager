@@ -1,11 +1,11 @@
 from sqlalchemy.orm import Session
-from app.crud.crud_transaction import (
+from backend.app.crud.crud_transaction import (
     get_transactions,
     create_transaction,
     update_transaction,
     delete_transaction,
 )
-from app.schemas.transaction import (
+from backend.app.schemas.transaction import (
     TransactionCreate,
     TransactionUpdate,
 )
