@@ -1,9 +1,9 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import LoginPage from "@/pages/LoginPage";
-import HomePage from "@/pages/HomePage";
 import RegistrationPage from "@/pages/RegistrationPage";
 import Layout from "@/pages/Layout";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import DashboardPage from "@/pages/DashboardPage";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
 
       {
         element: <ProtectedRoute />,
-        children: [{ path: "/home", element: <HomePage /> }],
+        children: [{ path: "/home", element: <DashboardPage /> }],
       },
     ],
   },
