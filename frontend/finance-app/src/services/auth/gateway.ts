@@ -3,7 +3,7 @@ import type {
   LoginCredentials,
   RegisterCredentials,
   User,
-} from "@/services/auth/schemas";
+} from "@/schemas/auth";
 
 interface ApiTokenResponse {
   access_token: string;
@@ -20,7 +20,7 @@ export async function loginGateway(
   form.append("username", credentials.username);
   form.append("password", credentials.password);
 
-  const { data } = await apiClient.post<ApiTokenResponse>("/token", form, {
+  const { data } = await apiClient.post<ApiTokenResponse>("/auth/token", form, {
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
   });
   return data;
@@ -30,7 +30,7 @@ export async function loginGateway(
 export async function registerGateway(
   payload: RegisterCredentials
 ): Promise<User> {
-  const { data } = await apiClient.post<User>("/register", payload);
+  const { data } = await apiClient.post<User>("/users/register", payload);
   return data;
 }
 
