@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { authService } from "@/services/auth/authClient";
+import { authService } from "@/services/authClient";
 import type { RegisterCredentials, User } from "@/services/auth/schemas";
 
 export function useRegister() {

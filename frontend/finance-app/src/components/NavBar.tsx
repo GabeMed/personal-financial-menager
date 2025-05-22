@@ -11,14 +11,14 @@ const NavBar = () => {
         </Link>
       </HStack>
       <HStack marginRight="20px">
-        <Link to="/Home">
+        <Link to="/home">
           <Text>Home</Text>
         </Link>
-        <Link to="/Login">
+        <Link to="/login">
           <Text>Login</Text>
         </Link>
-        <Link to="/Register">
-          <Text>Sign In</Text>
+        <Link to="/register">
+          <Text>Sign Up</Text>
         </Link>
       </HStack>
       <HStack>Help</HStack>
