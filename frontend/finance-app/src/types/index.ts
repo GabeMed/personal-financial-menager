@@ -1,0 +1,23 @@
+export interface CategoryDTO {
+  id: number;
+  name: string;
+}
+
+export type TransactionType = "income" | "expense";
+
+export interface TransactionDTO {
+  id: number;
+  description: string;
+  amount: number;
+  type: TransactionType;
+  category: CategoryDTO;
+  created_at: string;
+}
+
+export interface SummaryDTO {
+  balance: number;
+  income_total: number;
+  expense_total: number;
+  income_pct_by_category: Record<string, number>; // { "CategoryId": Percentage }
+  expense_pct_by_category: Record<string, number>;
+}
