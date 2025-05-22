@@ -18,6 +18,6 @@ export interface SummaryDTO {
   balance: number;
   income_total: number;
   expense_total: number;
-  income_pct_by_category: Record<string, number>; // { "CategoryId": Percentage }
-  expense_pct_by_category: Record<string, number>;
+  income_porcentage_by_category: Record<string, number>; // { "CategoryId": Percentage }
+  expense_porcentage_by_category: Record<string, number>;
 }
