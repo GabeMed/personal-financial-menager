@@ -6,7 +6,7 @@ const useCategories = () => {
   return useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const { data } = await apiClient.get<CategoryDTO[]>("/categories");
+      const { data } = await apiClient.get<CategoryDTO[]>("/categories/all");
       return data;
     },
     staleTime: 1000 * 60 * 5,

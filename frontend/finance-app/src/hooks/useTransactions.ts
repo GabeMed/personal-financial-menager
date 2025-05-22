@@ -6,7 +6,9 @@ const useTransactions = () => {
   return useQuery({
     queryKey: ["transactions"],
     queryFn: async () => {
-      const { data } = await apiClient.get<TransactionDTO[]>("/transactions");
+      const { data } = await apiClient.get<TransactionDTO[]>(
+        "/transactions/all"
+      );
       return data;
     },
   });
