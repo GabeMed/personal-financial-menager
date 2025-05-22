@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema, type LoginCredentials } from "@/services/auth/schemas";
+import { loginSchema, type LoginCredentials } from "@/schemas/auth";
 import useLogin from "@/hooks/useLogin";
 import { Link, useNavigate } from "react-router-dom";
 

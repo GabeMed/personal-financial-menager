@@ -10,7 +10,7 @@ import {
   type LoginCredentials,
   type RegisterCredentials,
   type User,
-} from "@/services/auth/schemas";
+} from "@/schemas/auth";
 
 const TOKEN_KEY = "token";
 const USER_KEY = "user";

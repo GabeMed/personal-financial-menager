@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { authService } from "@/services/authClient";
-import type { User } from "@/services/auth/schemas";
+import type { User } from "@/schemas/auth";
 
 interface AuthContext {
   user: User | null;
