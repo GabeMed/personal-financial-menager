@@ -1,23 +1,31 @@
 import { Dialog, Portal, Spinner } from "@chakra-ui/react";
 import useCategories from "@/hooks/useCategories";
 import useAddFormTransaction from "@/hooks/useAddFormTransaction";
+import useUpdateTransaction from "@/hooks/useUpdateTransaction";
 import TransactionForm from "./TransactionForm";
 import type { NewTransactionDTO } from "@/schemas/transaction";
+import type { TransactionDTO } from "@/types";
 
-const AddTransactionDialog = ({
-  isOpen,
-  onClose,
-}: {
+interface Props {
   isOpen: boolean;
   onClose: () => void;
-}) => {
+  initial?: TransactionDTO;
+}
+
+const AddTransactionDialog = ({ isOpen, onClose, initial }: Props) => {
   const { data: categories = [], isLoading: isLoadingCategories } =
     useCategories();
 
   const { mutateAsync: saveTransaction } = useAddFormTransaction();
+  const { mutateAsync: updateTransaction } = useUpdateTransaction();
 
   const handleSubmit = async (values: NewTransactionDTO) => {
     await saveTransaction(values);
+    if (initial) {
+      await updateTransaction({ id: initial.id, body: values });
+    } else {
+      await saveTransaction(values);
+    }
     onClose();
   };
 
@@ -44,6 +52,7 @@ const AddTransactionDialog = ({
                   categories={categories}
                   onSubmit={handleSubmit}
                   onCancel={onClose}
+                  initial={initial}
                 />
               )}
             </Dialog.Body>

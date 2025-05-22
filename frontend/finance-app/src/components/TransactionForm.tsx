@@ -12,22 +12,28 @@ import {
   NewTransactionSchema,
   type NewTransactionDTO,
 } from "@/schemas/transaction";
-import { type CategoryDTO } from "@/types/index";
+import { type CategoryDTO, type TransactionDTO } from "@/types/index";
 import { useMemo } from "react";
 
 interface Props {
   categories: CategoryDTO[];
   onSubmit: (values: NewTransactionDTO) => Promise<void>;
   onCancel: () => void;
+  initial?: TransactionDTO;
 }
 
-const TransactionForm = ({ categories, onSubmit, onCancel }: Props) => {
+const TransactionForm = ({
+  categories,
+  onSubmit,
+  onCancel,
+  initial,
+}: Props) => {
   const defaultValues = useMemo<NewTransactionDTO>(
     () => ({
-      type: "expense",
-      category_id: categories[0]?.id ?? null,
-      description: "",
-      amount: 0,
+      type: initial?.type ?? "expense",
+      category_id: initial?.category.id ?? categories[0]?.id ?? null,
+      description: initial?.description ?? "",
+      amount: initial?.amount ?? 0,
       newCategoryName: "",
     }),
     [categories]
