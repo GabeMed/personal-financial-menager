@@ -25,16 +25,16 @@ const TransactionList = ({
     <Box>
       <Flex justify="space-between" mb={3} mt={2}>
         <Text fontSize="lg" fontWeight="bold">
-          Transações
+          Transactions
         </Text>
         <Button size="sm" colorScheme="teal" onClick={onAdd}>
-          + Nova
+          + Add
         </Button>
       </Flex>
 
       {transactions.length === 0 ? (
         <Text fontSize="sm" color="gray.400">
-          Nenhuma transação registrada ainda
+          No transaction registered
         </Text>
       ) : (
         <Stack gap={2}>
