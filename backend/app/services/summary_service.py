@@ -41,10 +41,10 @@ def get_summary(db: Session, user_id: int, start: date | None, end: date | None)
         "balance": db.get(User, user_id).balance,
         "income_total": total_income,
         "expense_total": total_expense,
-        "income_pct_by_category": (
+        "income_porcentage_by_category": (
             porcentage_map(TransactionType.income, total_income) if total_income else {}
         ),
-        "expense_pct_by_category": (
+        "expense_porcentage_by_category": (
             porcentage_map(TransactionType.expense, total_expense)
             if total_expense
             else {}
