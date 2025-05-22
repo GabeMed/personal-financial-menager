@@ -10,7 +10,7 @@ import {
 
 interface Slice {
   category: string;
-  porcentage: number; // 0–100
+  porcentage: number;
 }
 
 const COLORS = ["#38B2AC", "#ED8936", "#63B3ED", "#E53E3E", "#718096"];
@@ -64,7 +64,7 @@ const PieChartCard = ({
         <PieChart>
           <Pie
             data={data}
-            dataKey="pct"
+            dataKey="porcentage"
             nameKey="category"
             cx="50%"
             cy="50%"
@@ -73,7 +73,7 @@ const PieChartCard = ({
             {data.map((_, idx) => (
               <Cell key={idx} fill={COLORS[idx % COLORS.length]} />
             ))}
-            <Label value="Expenses (%)" position="center" fill="#CBD5E0" />
+            <Label value="Expenses (%)" position="outside" fill="#CBD5E0" />
           </Pie>
           <Tooltip formatter={(val: number) => `${val.toFixed(1)}%`} />
         </PieChart>
