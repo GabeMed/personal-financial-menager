@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import UTC, datetime
 from decimal import Decimal
 from pydantic import BaseModel
 from backend.app.schemas.category import CategoryResponse
@@ -9,7 +9,7 @@ class TransactionBase(BaseModel):
     type: Literal["expense", "income"]
     amount: Decimal
     description: str | None = None
-    date: datetime
+    date: datetime = datetime.now(UTC)
     category_id: int
 
 
