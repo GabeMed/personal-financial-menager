@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from datetime import date
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
 from backend.app.db.session import get_db
 from backend.app.core.oauth2 import get_current_user
@@ -7,6 +8,7 @@ from backend.app.schemas.transaction import (
     TransactionUpdate,
     TransactionResponse,
 )
+from backend.app.services.summary_service import get_summary
 from backend.app.services.transaction_service import (
     list_transactions,
     add_transaction,
@@ -77,3 +79,13 @@ def delete_transaction(
     if transaction is None:
         raise HTTPException(status_code=404, detail="Transaction not found")
     remove_transaction(db, transaction)
+
+
+@router.get("/summary")
+def read_summary(
+    start: date | None = Query(None),
+    end: date | None = Query(None),
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    return get_summary(db, current_user.id, start, end)

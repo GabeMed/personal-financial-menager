@@ -18,7 +18,7 @@ class Transaction(Base):
     type = Column(Enum(TransactionType), nullable=False)
     amount = Column(Numeric(10, 2), nullable=False)
     description = Column(String, nullable=True)
-    date = Column(DateTime, default=datetime.datetime.utcnow, nullable=False)
+    date = Column(DateTime, default=datetime.datetime.now(datetime.UTC), nullable=False)
 
     user = relationship("User", back_populates="transactions")
     category = relationship("Category", back_populates="transactions")
