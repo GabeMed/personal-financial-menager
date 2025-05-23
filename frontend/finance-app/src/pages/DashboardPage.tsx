@@ -1,17 +1,11 @@
-import {
-  Box,
-  Heading,
-  SimpleGrid,
-  Spinner,
-  Text,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Box, Heading, SimpleGrid, useDisclosure } from "@chakra-ui/react";
 import useSummary from "@/hooks/useSummary";
 import useTransactions from "@/hooks/useTransactions";
 import useCategories from "@/hooks/useCategories";
-import PieChartCard from "@/components/PieChartCard";
 import TransactionList from "@/components/TransactionList";
 import AddTransactionDialog from "@/components/AddTransactionDialog";
+import { BalanceCard } from "@/components/layout/BalanceCard";
+import { SummaryCharts } from "@/components/charts/SummaryCharts";
 
 const DashboardPage = () => {
   const { data: summary, isLoading: summaryLoading } = useSummary();
@@ -49,33 +43,12 @@ const DashboardPage = () => {
       </Heading>
 
       <SimpleGrid columns={{ base: 1, md: 2 }} gap={6} mb={8}>
-        <Box
-          bg="teal.600"
-          color="white"
-          p={6}
-          rounded="2xl"
-          shadow="lg"
-          textAlign="center"
-        >
-          {summaryLoading ? (
-            <Spinner size="lg" />
-          ) : (
-            <>
-              <Text fontSize="4xl" fontWeight="bold">
-                {summary!.balance.toLocaleString("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
-                })}
-              </Text>
-              <Text fontSize="sm" mt={2}>
-                Current Balance
-              </Text>
-            </>
-          )}
-        </Box>
+        <BalanceCard
+          value={summary ? summary.balance : 0}
+          isLoading={summaryLoading}
+        ></BalanceCard>
 
-        <PieChartCard data={expenseSlices} isLoading={summaryLoading} />
-        <PieChartCard data={incomeSlices} isLoading={summaryLoading} />
+        <SummaryCharts expenses={expenseSlices} incomes={incomeSlices} />
       </SimpleGrid>
 
       <TransactionList
