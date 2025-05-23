@@ -10,10 +10,10 @@ export function BalanceCard({ value, isLoading }: BalanceCardProps) {
   return (
     <Card.Root borderRadius="2xl">
       <Card.Body>
-        <Text fontSize="sm" color="gray.400">
+        <Text fontSize="xl" color="gray.400">
           Balance
         </Text>
-        <Text fontSize="2xl" fontWeight="bold">
+        <Text fontSize="6xl" fontWeight="bold">
           {value.toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
