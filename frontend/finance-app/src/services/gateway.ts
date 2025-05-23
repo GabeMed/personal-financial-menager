@@ -10,9 +10,6 @@ interface ApiTokenResponse {
   token_type: string;
 }
 
-/**
- * POST /token — OAuth2PasswordRequestForm (x‑www‑form‑urlencoded)
- */
 export async function loginGateway(
   credentials: LoginCredentials
 ): Promise<ApiTokenResponse> {
@@ -26,7 +23,6 @@ export async function loginGateway(
   return data;
 }
 
-/** POST /register  → cria usuário e devolve o próprio usuário */
 export async function registerGateway(
   payload: RegisterCredentials
 ): Promise<User> {
@@ -34,7 +30,6 @@ export async function registerGateway(
   return data;
 }
 
-/** GET /users/me — retorna usuário logado */
 export async function meGateway(): Promise<User> {
   const { data } = await apiClient.get<User>("/users/me");
   return data;

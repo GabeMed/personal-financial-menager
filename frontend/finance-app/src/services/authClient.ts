@@ -1,9 +1,5 @@
 import { jwtDecode } from "jwt-decode";
-import {
-  loginGateway,
-  meGateway,
-  registerGateway,
-} from "@/services/auth/gateway";
+import { loginGateway, meGateway, registerGateway } from "@/services/gateway";
 import {
   loginSchema,
   registerSchema,
