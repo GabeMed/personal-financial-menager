@@ -83,6 +83,7 @@ export const authService = {
 
   logout() {
     clearSession();
+    window.location.reload();
   },
 
   getCurrentUser(): User | null {
