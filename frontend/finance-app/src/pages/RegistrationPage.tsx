@@ -26,7 +26,7 @@ const RegistrationPage = () => {
 
   const onSubmit = (data: RegisterCredentials) =>
     signup(data, {
-      onSuccess: () => navigate("/home"),
+      onSuccess: () => navigate("/"),
     });
 
   return (
