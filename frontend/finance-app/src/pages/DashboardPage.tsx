@@ -1,18 +1,20 @@
-import { Box, Heading, SimpleGrid, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Heading, HStack, SimpleGrid } from "@chakra-ui/react";
 import useSummary from "@/hooks/useSummary";
-import useTransactions from "@/hooks/useTransactions";
 import useCategories from "@/hooks/useCategories";
-import TransactionList from "@/components/TransactionList";
-import AddTransactionDialog from "@/components/AddTransactionDialog";
+import TransactionList from "@/components/transactions/TransactionList";
 import { BalanceCard } from "@/components/layout/BalanceCard";
 import { SummaryCharts } from "@/components/charts/SummaryCharts";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/context/AuthContext";
+import { authService } from "@/services/authClient";
 
 const DashboardPage = () => {
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+  if (!isAuthenticated) navigate("/");
+
   const { data: summary, isLoading: summaryLoading } = useSummary();
-  const { data: transactions, isLoading: transactionLoading } =
-    useTransactions();
   const { data: categories = [] } = useCategories();
-  const { open, onOpen, onClose } = useDisclosure();
 
   const categoryNames = Object.fromEntries(
     categories.map((c) => [String(c.id), c.name])
@@ -38,9 +40,20 @@ const DashboardPage = () => {
 
   return (
     <Box p={6}>
-      <Heading size="xl" mb={6}>
-        Dashboard
-      </Heading>
+      <HStack justifyContent="space-between" alignContent="center">
+        <Heading size="xl" mb={6}>
+          Dashboard
+        </Heading>
+        <Button
+          marginBottom={5}
+          fontWeight="bold"
+          size="lg"
+          variant="ghost"
+          onClick={authService.logout}
+        >
+          Logout
+        </Button>
+      </HStack>
 
       <SimpleGrid columns={{ base: 1, md: 2 }} gap={6} mb={8}>
         <BalanceCard
@@ -51,13 +64,7 @@ const DashboardPage = () => {
         <SummaryCharts expenses={expenseSlices} incomes={incomeSlices} />
       </SimpleGrid>
 
-      <TransactionList
-        transactions={transactions ?? []}
-        isLoading={transactionLoading}
-        onAdd={onOpen}
-      />
-
-      <AddTransactionDialog isOpen={open} onClose={onClose} />
+      <TransactionList />
     </Box>
   );
 };

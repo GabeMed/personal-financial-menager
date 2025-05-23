@@ -73,7 +73,7 @@ const RegistrationPage = () => {
               Register
             </Button>
             <Box textAlign="center">
-              <Link to="/Login">Already resgistered ?</Link>
+              <Link to="/">Already resgistered ?</Link>
             </Box>
           </Stack>
         </form>

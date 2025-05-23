@@ -26,7 +26,7 @@ export default function LoginPage() {
 
   const onSubmit = (data: LoginCredentials) =>
     login(data, {
-      onSuccess: () => navigate("/home"),
+      onSuccess: () => navigate("/dashboard"),
     });
 
   return (
